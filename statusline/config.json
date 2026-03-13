@@ -1,0 +1,9 @@
+{
+  "showDuration": true,
+  "showDirectory": true,
+  "showGitBranch": true,
+  "showContextBar": true,
+  "showTokens": true,
+  "showOutputTokens": true,
+  "showSpeed": true
+}

@@ -1,8 +1,45 @@
-# Claude Skills
+# Claude Code Tools
 
-个人 Claude Code 技能集合。
+个人 Claude Code 工具和配置集合。
 
-## 技能列表
+## 目录结构
+
+```
+claude/
+├── blog/                    # 博客文章
+├── statusline/              # 状态栏工具
+└── feishu-notifications/    # 飞书通知技能
+```
+
+## 工具列表
+
+### statusline
+
+Claude Code 状态栏，实时显示上下文消耗、tokens 使用量、生成速度等信息。
+
+**效果预览：**
+```
+[Opus] 📁 myproject  git:(main) | ⏱️ 3m5s
+███░░░░░░░ 35% | 53k/200k | out: 12k | 42.1 t/s
+```
+
+**一键安装：**
+```bash
+mkdir -p ~/.claude
+curl -fsSL https://raw.githubusercontent.com/mlbo/claude/main/statusline/statusline.sh -o ~/.claude/statusline.sh
+curl -fsSL https://raw.githubusercontent.com/mlbo/claude/main/statusline/config.json -o ~/.claude/statusline-config.json
+chmod +x ~/.claude/statusline.sh
+```
+
+然后在 `~/.claude/settings.json` 添加：
+```json
+"statusLine": {
+  "type": "command",
+  "command": "~/.claude/statusline.sh"
+}
+```
+
+**详细文档：** [statusline/README.md](statusline/README.md)
 
 ### feishu-notifications
 
@@ -36,3 +73,13 @@ feishu-notify progress "正在运行测试" 50
 # 错误通知
 feishu-notify error "部署失败"
 ```
+
+## 博客文章
+
+- [打造 Claude Code 状态栏](blog/statusline.md) - 记录 statusline 的实现过程
+
+## 依赖
+
+- `jq` - JSON 解析
+- `bc` - 数字计算（系统自带）
+- `git` - 版本控制
