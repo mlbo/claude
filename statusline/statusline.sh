@@ -2,8 +2,9 @@
 # Claude Code Status Line
 input=$(cat)
 
-# 加载配置
-CONFIG="$HOME/.claude/statusline-config.json"
+# 从脚本所在目录加载配置
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+CONFIG="$SCRIPT_DIR/config.json"
 [ -f "$CONFIG" ] && eval "$(jq -r 'to_entries[] | "SHOW_\(.key | tr "a-z" "A-Z")=\(.value)"' "$CONFIG" 2>/dev/null)"
 [ -z "$SHOW_DURATION" ] && { SHOW_DURATION=true; SHOW_DIRECTORY=true; SHOW_GIT_BRANCH=true; SHOW_CONTEXT_BAR=true; SHOW_TOKENS=true; SHOW_OUTPUT_TOKENS=true; SHOW_SPEED=true; }
 

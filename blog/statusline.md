@@ -143,22 +143,17 @@ Claude Code 就加了个配置文件支持：
 
 ## 安装
 
-如果你想用，一行命令：
+如果你想用：
 
 ```bash
-mkdir -p ~/.claude
-curl -fsSL https://raw.githubusercontent.com/mlbo/claude/main/statusline/statusline.sh -o ~/.claude/statusline.sh
-curl -fsSL https://raw.githubusercontent.com/mlbo/claude/main/statusline/config.json -o ~/.claude/statusline-config.json
-chmod +x ~/.claude/statusline.sh
+# 克隆仓库
+git clone https://github.com/mlbo/claude.git ~/claude
+
+# 运行安装脚本
+cd ~/claude/statusline
+./install.sh
 ```
 
-然后在 `~/.claude/settings.json` 加上：
-
-```json
-"statusLine": {
-  "type": "command",
-  "command": "~/.claude/statusline.sh"
-}
-```
+文件会安装到 `~/.claude/statusline/` 目录，配置文件也在那里，修改后直接生效。
 
 代码在 [GitHub](https://github.com/mlbo/claude/tree/main/statusline)，有问题可以提 issue。

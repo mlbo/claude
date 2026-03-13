@@ -29,6 +29,11 @@ claude/
 - `config.json` - 配置文件（如需要）
 - `install.sh` / `uninstall.sh` - 安装卸载脚本
 
+**文件放置原则：**
+- 安装后文件放在 `~/.claude/<工具名>/` 目录
+- 同一功能的文件放在同一文件夹，不散落到 `~/.claude/` 根目录
+- 例如：`~/.claude/statusline/statusline.sh`、`~/.claude/statusline/config.json`
+
 **跨平台支持：** 脚本需同时兼容 macOS 和 Linux，注意：
 - `sed` 命令差异（macOS 用 `sed -i ''`，Linux 用 `sed -i`）
 - `date` 命令差异
