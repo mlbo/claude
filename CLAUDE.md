@@ -4,7 +4,7 @@
 
 ## 核心规范
 
-> ⚠️ 必须遵守的规则，违反会导致混乱
+> ⚠️ 必须遵守的规则
 
 | 规则 | 说明 |
 |------|------|
@@ -18,14 +18,14 @@
 
 ```
 claude/
-├── blog/                    # 博客文章
-│   ├── md/                  # Markdown 版本
-│   └── html/                # 公众号 HTML 版本
+├── blog/md/                 # Markdown 博客
+├── blog/html/               # 公众号 HTML
 ├── blog-writer/             # 博客生成技能
+├── claude-md-checker/       # CLAUDE.md 检查器
 ├── statusline/              # 状态栏工具
 ├── feishu-notifications/    # 飞书通知技能
-├── CLAUDE.md                # 本文件
-└── README.md                # 项目说明
+├── CLAUDE.md
+└── README.md
 ```
 
 ## 创建新工具
@@ -43,15 +43,9 @@ claude/
 
 ### 安装位置
 
-安装后文件放在 `~/.claude/<工具名>/`，同一功能放同一目录：
-```
-~/.claude/statusline/statusline.sh
-~/.claude/statusline/config.json
-```
+文件安装到 `~/.claude/<工具名>/`，同一功能放同一目录。
 
 ### 跨平台兼容
-
-脚本需同时支持 macOS 和 Linux：
 
 | 差异 | macOS | Linux |
 |------|-------|-------|
@@ -61,37 +55,17 @@ claude/
 
 ## 创建 Skill
 
-### 文件结构
-
 ```
 skill名/
 ├── SKILL.md             # 技能定义（必需）
-└── wechat-template.html # 模板文件（按需）
+└── *.html               # 模板文件（按需）
 ```
 
-### 安装命令
-
-```bash
-mkdir -p ~/.claude/skills/<skill名>
-cp <skill名>/SKILL.md <skill名>/*.html ~/.claude/skills/<skill名>/
-```
+安装：`cp <skill名>/SKILL.md ~/.claude/skills/<skill名>/`
 
 ## 博客生成
 
-### 输出位置
-
-- `blog/md/<主题>.md` - Markdown 版本
-- `blog/html/<主题>-wechat.html` - 公众号版本
-
-### 公众号 HTML 格式
-
-基于 markdown-nice 风格：
-- 字体：PingFang SC, Microsoft YaHei
-- 字号：正文 16px，标题 22px，小标题 17px
-- 行高：1.75
-- 小标题：绿色左边框 `#42b983`
-- 代码块：暗色背景 `#282c34`
-- 行内代码：橙色 `#e96900`
+输出位置：`blog/md/` 和 `blog/html/`
 
 模板：`blog-writer/wechat-template.html`
 
@@ -105,27 +79,9 @@ cp <skill名>/SKILL.md <skill名>/*.html ~/.claude/skills/<skill名>/
 - `bc` - 数字计算
 - `git` - 版本控制
 
-## README 写作规范
+## README 更新规范
 
-README.md 保持简洁，详细文档放在各自的 README.md 里。
-
-### 新增 Skill
-
-在 Skills 表格添加一行：
-```markdown
-| <skill名> | 一句话描述 | [SKILL.md](<skill名>/SKILL.md) |
-```
-
-### 新增 Tool
-
-在 Tools 表格添加一行：
-```markdown
-| <tool名> | 一句话描述 | [README.md](<tool名>/README.md) |
-```
-
-### 新增博客
-
-在博客文章列表添加：
-```markdown
-- [标题](blog/md/<文件名>.md) - 简短描述
-```
+新增内容时更新 README.md：
+- Skill：Skills 表格添加一行
+- Tool：Tools 表格添加一行
+- 博客：博客文章列表添加链接

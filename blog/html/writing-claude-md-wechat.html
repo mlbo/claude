@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>如何写好 CLAUDE.md</title>
+</head>
+<body style="font-family: -apple-system-font, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei UI', 'Microsoft YaHei', Arial, sans-serif; font-size: 16px; color: #3e3e3e; line-height: 1.6; padding: 20px 15px; background-color: #fff;">
+
+<!-- ==================== 标题 ==================== -->
+<section style="margin-top: 10px; margin-bottom: 30px; text-align: center;">
+<h1 style="margin: 0; padding: 0; font-size: 22px; font-weight: bold; color: #000;">如何写好 CLAUDE.md：官方文档最佳实践</h1>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">最近整理 Claude Code 配置时，发现官方文档里有一套完整的 CLAUDE.md 最佳实践。结合自己的踩坑经验，分享一下如何写好这个文件。</p>
+</section>
+
+<!-- ==================== 小标题 ==================== -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">CLAUDE.md 是什么？</h2>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">CLAUDE.md 是 Claude Code 在启动时自动读取的项目指令文件。官方文档称之为"给 Claude 的持久化上下文"——每次对话开始，Claude 都会先读这个文件，了解项目规范和工作方式。</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">除了 CLAUDE.md，Claude Code 还有 <strong>Auto Memory</strong> 功能。两者配合使用：</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">• <strong>CLAUDE.md</strong> — 你写的指令和规则<br/>• <strong>Auto Memory</strong> — Claude 自动记录的学习内容</p>
+</section>
+
+<!-- ==================== 小标题 ==================== -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">放在哪里？</h2>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">官方支持多个位置：</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">• <code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">/etc/claude-code/CLAUDE.md</code> — 组织级，IT 管理<br/>• <code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">~/.claude/CLAUDE.md</code> — 用户级，个人偏好<br/>• <code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">./CLAUDE.md</code> — 项目级，团队共享</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;"><strong>推荐做法</strong>：项目规范写在 <code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">./CLAUDE.md</code> 并提交到 git，个人偏好写在 <code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">~/.claude/CLAUDE.md</code>。</p>
+</section>
+
+<!-- ==================== 小标题 ==================== -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">如何写好 CLAUDE.md？</h2>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">官方文档强调四个原则：<strong>大小、结构、具体性、一致性</strong>。</p>
+</section>
+
+<section style="margin-top: 20px; margin-bottom: 20px; padding: 15px 20px; background-color: #f8f8f8; border-left: 4px solid #42b983;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;"><strong>大小：控制在 200 行以内</strong></p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">CLAUDE.md 会消耗 context window。文件越长，Claude 遵循指令的效果越差。</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">官方建议：每一行都要问自己——删掉这行会导致 Claude 犯错吗？如果不会，就删掉。</p>
+</section>
+
+<section style="margin-top: 20px; margin-bottom: 20px; padding: 15px 20px; background-color: #f8f8f8; border-left: 4px solid #42b983;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;"><strong>具体性：可验证的指令</strong></p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">官方对比示例：</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">• ❌ "Format code properly" → ✅ "Use 2-space indentation"<br/>• ❌ "Test your changes" → ✅ "Run <code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">npm test</code> before committing"<br/>• ❌ "Keep files organized" → ✅ "API handlers live in <code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">src/api/handlers/</code>"</p>
+</section>
+
+<!-- ==================== 小标题 ==================== -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">应该写什么？</h2>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;"><strong>✅ 应该包含：</strong></p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">• Claude 猜不到的 Bash 命令<br/>• 与默认不同的代码风格规则<br/>• 测试指令和偏好<br/>• 仓库规范（分支命名、PR 惯例）<br/>• 项目特有的架构决策<br/>• 常见的坑</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;"><strong>❌ 不应该包含：</strong></p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">• Claude 读代码就能知道的信息<br/>• 标准语言约定<br/>• 详细 API 文档（链接到文档）<br/>• 冗长的解释或教程</p>
+</section>
+
+<!-- ==================== 小标题 ==================== -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">进阶技巧</h2>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;"><strong>@import 引入其他文件</strong></p>
+</section>
+
+<section style="margin-top: 15px; margin-bottom: 15px; padding: 16px; background-color: #282c34; border-radius: 5px; overflow-x: auto;">
+<pre style="margin: 0; padding: 0; font-size: 14px; line-height: 1.6; color: #abb2bf; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; white-space: pre-wrap; word-break: break-all;">See @README.md for project overview.
+
+# Additional Instructions
+- Git workflow: @docs/git-instructions.md</pre>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;"><strong>.claude/rules/ 组织规则</strong></p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">大型项目可以用 <code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">.claude/rules/</code> 目录组织指令，还支持 <code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">paths</code> frontmatter 限定规则只对特定文件生效。</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;"><strong>Auto Memory</strong></p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">Claude 会自动记录你纠正它的内容。使用 <code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">/memory</code> 命令查看和管理。</p>
+</section>
+
+<!-- ==================== 小标题 ==================== -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">快速开始</h2>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">官方提供了便捷命令：<code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">/init</code></p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">这个命令会分析你的代码库，检测构建系统、测试框架和代码模式，自动生成一个 CLAUDE.md 草稿。</p>
+</section>
+
+<!-- ==================== 小标题 ==================== -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">检查工具：claude-md-checker</h2>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">我基于官方最佳实践创建了一个 skill，可以自动检查 CLAUDE.md 是否合规。</p>
+</section>
+
+<section style="margin-top: 15px; margin-bottom: 15px; padding: 16px; background-color: #282c34; border-radius: 5px; overflow-x: auto;">
+<pre style="margin: 0; padding: 0; font-size: 14px; line-height: 1.6; color: #abb2bf; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; white-space: pre-wrap; word-break: break-all;"># 安装
+mkdir -p ~/.claude/skills/claude-md-checker
+cp claude-md-checker/SKILL.md ~/.claude/skills/claude-md-checker/
+
+# 使用
+"检查一下 CLAUDE.md 写得对不对"
+"审计一下我的 CLAUDE.md"</pre>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;"><strong>检查项：</strong></p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">• 大小检查（≤ 200 行）<br/>• 结构检查（Markdown 标题、列表、表格）<br/>• 具体性检查（可验证的指令）<br/>• 内容检查（应该/不应该包含的内容）<br/>• 一致性检查（冲突、重复、过时）<br/>• 高级特性检查（@import、.claude/rules/）</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">工具会输出评分和具体的优化建议，省去每次手动对照规范的时间。</p>
+</section>
+
+<!-- ==================== 小标题 ==================== -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">总结</h2>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">结合官方文档和个人经验，写好 CLAUDE.md 的关键：</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">• <strong>控制大小</strong> — 200 行以内，每行都值得<br/>• <strong>具体可验证</strong> — "Run <code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">npm test</code>" 而不是 "Test your changes"<br/>• <strong>组织结构</strong> — 用 Markdown 标题和列表<br/>• <strong>善用工具</strong> — @import、.claude/rules/、Auto Memory<br/>• <strong>定期维护</strong> — 删除过时指令，保持一致性</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">好的 CLAUDE.md 就像是给 Claude 的操作手册，投入时间打磨，会让协作效率大幅提升。</p>
+</section>
+
+<!-- ==================== 小标题 ==================== -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">参考</h2>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">• Claude Code Memory 官方文档<br/><a href="https://code.claude.com/docs/en/memory" style="color: #576b95; text-decoration: none;">https://code.claude.com/docs/en/memory</a></p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">• Claude Code Best Practices<br/><a href="https://code.claude.com/docs/en/best-practices" style="color: #576b95; text-decoration: none;">https://code.claude.com/docs/en/best-practices</a></p>
+</section>
+
+<!-- ==================== 分隔线 ==================== -->
+<section style="margin-top: 30px; margin-bottom: 30px;">
+<p style="text-align: center; color: #ccc; font-size: 14px;">--- END ---</p>
+</section>
+
+</body>
+</html>
