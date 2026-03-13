@@ -104,3 +104,28 @@ cp <skill名>/SKILL.md <skill名>/*.html ~/.claude/skills/<skill名>/
 - `jq` - JSON 解析
 - `bc` - 数字计算
 - `git` - 版本控制
+
+## README 写作规范
+
+README.md 保持简洁，详细文档放在各自的 README.md 里。
+
+### 新增 Skill
+
+在 Skills 表格添加一行：
+```markdown
+| <skill名> | 一句话描述 | [SKILL.md](<skill名>/SKILL.md) |
+```
+
+### 新增 Tool
+
+在 Tools 表格添加一行：
+```markdown
+| <tool名> | 一句话描述 | [README.md](<tool名>/README.md) |
+```
+
+### 新增博客
+
+在博客文章列表添加：
+```markdown
+- [标题](blog/md/<文件名>.md) - 简短描述
+```
