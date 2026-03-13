@@ -7,7 +7,13 @@
 ```
 claude/
 ├── blog/                    # 博客文章
-│   └── statusline.md        # 状态栏实现记录
+│   ├── md/                  # Markdown 版本
+│   │   └── statusline.md
+│   └── html/                # 公众号 HTML 版本
+│       └── statusline-wechat.html
+├── blog-writer/             # 博客生成技能
+│   ├── SKILL.md             # 技能定义
+│   └── wechat-template.html # 公众号模板
 ├── statusline/              # 状态栏工具
 │   ├── README.md            # 使用文档
 │   ├── statusline.sh        # 主脚本
@@ -51,6 +57,20 @@ claude/
 - 踩过的坑
 - 设计决策
 - 如何与 Claude Code 协作
+
+**同时生成两个版本：**
+- `<主题>.md` - 技术博客（Markdown 格式）
+- `<主题>-wechat.html` - 公众号版本（HTML 格式）
+
+**公众号 HTML 格式规范（参考 markdown-nice）：**
+- 字体：PingFang SC, Microsoft YaHei 等中文字体
+- 字号：正文 16px，标题 22px，小标题 17px
+- 行高：1.75
+- 小标题：左边框 + 绿色（#42b983）
+- 代码块：暗色背景（#282c34）+ 等宽字体
+- 行内代码：浅灰背景 + 橙色（#e96900）
+- 引用块：浅灰背景 + 左边框
+- 模板参见 `blog-writer/wechat-template.html`
 
 ## 依赖
 

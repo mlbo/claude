@@ -7,11 +7,38 @@
 ```
 claude/
 ├── blog/                    # 博客文章
+├── blog-writer/             # 博客生成技能
 ├── statusline/              # 状态栏工具
 └── feishu-notifications/    # 飞书通知技能
 ```
 
-## 工具列表
+## Skills
+
+### blog-writer
+
+生成博客文章，支持 Markdown 和微信公众号 HTML 两种格式。
+
+**功能：**
+- 自动生成技术博客结构
+- 公众号 HTML 格式（markdown-nice 风格）
+- 代码高亮、引用块、列表等样式
+
+**安装：**
+```bash
+mkdir -p ~/.claude/skills/blog-writer
+cp blog-writer/SKILL.md blog-writer/wechat-template.html ~/.claude/skills/blog-writer/
+```
+
+**用法：**
+对 Claude Code 说：
+- "写一篇关于 XXX 的博客"
+- "帮我写个文章记录这个功能"
+
+详细文档：[blog-writer/SKILL.md](blog-writer/SKILL.md)
+
+## Tools
+
+## Tools
 
 ### statusline
 
@@ -68,7 +95,7 @@ feishu-notify error "部署失败"
 
 ## 博客文章
 
-- [打造 Claude Code 状态栏](blog/statusline.md) - 记录 statusline 的实现过程
+- [打造 Claude Code 状态栏](blog/md/statusline.md) - 记录 statusline 的实现过程
 
 ## 依赖
 

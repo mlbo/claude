@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>我和 Claude Code 一起写了个状态栏</title>
+</head>
+<body style="font-family: -apple-system-font, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei UI', 'Microsoft YaHei', Arial, sans-serif; font-size: 16px; color: #3e3e3e; line-height: 1.6; padding: 20px 15px; background-color: #fff;">
+
+<!-- 标题 -->
+<section style="margin-top: 10px; margin-bottom: 30px; text-align: center;">
+<h1 style="margin: 0; padding: 0; font-size: 22px; font-weight: bold; color: #000;">我和 Claude Code 一起写了个状态栏</h1>
+</section>
+
+<!-- 引言 -->
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">最近用 Claude Code 时总有个烦恼：聊着聊着上下文就满了，然后被迫压缩对话，之前的上下文就丢了。想着要是能实时看到上下文使用情况就好了。</p>
+</section>
+
+<!-- 小标题 -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">Claude Code 的回答</h2>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">我问 Claude Code：「帮我装一个可以看到上下文消耗的插件」。</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">它没有直接给我装插件，而是告诉我它有内置的 <code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">/statusline</code> 功能。</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">机制很简单：Claude Code 把会话数据打包成 JSON，传给你配置的脚本。你的脚本处理后输出什么，就显示什么。</p>
+</section>
+
+<!-- 小标题 -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">开始实现</h2>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">我先让 Claude Code 写了个基础版本，能显示模型名和百分比。跑起来后，我陆陆续续提需求：</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">• 加上当前目录<br/>• 显示 git 分支<br/>• 运行时长也加上<br/>• 成本不用了<br/>• 显示 tokens 数量</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">Claude Code 每次都很配合地改。</p>
+</section>
+
+<!-- 小标题 -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">踩了一个坑</h2>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">我想加个进度条，用 <code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">█</code> 和 <code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">░</code> 这两个 Unicode 字符。</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">macOS 上测试没问题，但在 Linux 服务器上变成了乱码。</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">排查后发现是 <code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">tr</code> 命令的问题——它是按字节处理字符的，遇到多字节的 UTF-8 字符就会出错。</p>
+</section>
+
+<!-- 引用块 -->
+<section style="margin-top: 20px; margin-bottom: 20px; padding: 15px 20px; background-color: #f8f8f8; border-left: 4px solid #42b983;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;"><strong>解决方案是用循环构建字符串，而不是用 tr 转换。</strong></p>
+</section>
+
+<!-- 小标题 -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">最终效果</h2>
+</section>
+
+<!-- 代码块 -->
+<section style="margin-top: 15px; margin-bottom: 15px; padding: 16px; background-color: #282c34; border-radius: 5px; overflow-x: auto;">
+<pre style="margin: 0; padding: 0; font-size: 14px; line-height: 1.6; color: #abb2bf; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; white-space: pre-wrap; word-break: break-all;">[Opus] 📁 myproject  git:(main) | ⏱️ 3h8m4s
+███░░░░░░░ 35% | 53k/200k | out: 12k | 42.1 t/s</pre>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;"><strong>第一行：</strong>模型、目录、分支、时长</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;"><strong>第二行：</strong>进度条、上下文使用、输出 tokens、生成速度</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">进度条颜色会变：绿色正常，黄色警告，红色危险。</p>
+</section>
+
+<!-- 小标题 -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">开源实现现状</h2>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">社区已经有比较成熟的项目：<strong>claude-hud</strong> by Jarrod Watts</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">这是目前最完善的状态栏插件，支持工具追踪、子代理状态、Todo 进度条等。</p>
+</section>
+
+<!-- 代码块 -->
+<section style="margin-top: 15px; margin-bottom: 15px; padding: 16px; background-color: #282c34; border-radius: 5px; overflow-x: auto;">
+<pre style="margin: 0; padding: 0; font-size: 14px; line-height: 1.6; color: #abb2bf; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; white-space: pre-wrap; word-break: break-all;">/plugin marketplace add jarrodwatts/claude-hud
+/plugin install claude-hud</pre>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">我的实现更轻量，就是一个独立的 shell 脚本。</p>
+</section>
+
+<!-- 小标题 -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">一些思考</h2>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">整个实现过程大概半小时。我只需要描述需求，Claude Code 负责写代码、测试、调试。</p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">有意思的是，它不是给我推荐一个现成的插件，而是告诉我 Claude Code 本身就有这个能力。</p>
+</section>
+
+<!-- 引用块 -->
+<section style="margin-top: 20px; margin-bottom: 20px; padding: 15px 20px; background-color: #f8f8f8; border-left: 4px solid #42b983;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;"><strong>Claude Code 的设计哲学是提供机制而不是提供产品——给你一个管道，你想显示什么自己写。</strong></p>
+</section>
+
+<!-- 小标题 -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">安装</h2>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">如果你想用：</p>
+</section>
+
+<!-- 代码块 -->
+<section style="margin-top: 15px; margin-bottom: 15px; padding: 16px; background-color: #282c34; border-radius: 5px; overflow-x: auto;">
+<pre style="margin: 0; padding: 0; font-size: 14px; line-height: 1.6; color: #abb2bf; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; white-space: pre-wrap; word-break: break-all;">git clone https://github.com/mlbo/claude.git ~/claude
+cd ~/claude/statusline && ./install.sh</pre>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">文件会安装到 <code style="margin: 0 2px; padding: 2px 4px; font-size: 14px; background-color: rgba(27,31,35,.05); border-radius: 3px; font-family: 'Operator Mono', Consolas, Monaco, Menlo, monospace; color: #e96900;">~/.claude/statusline/</code> 目录。</p>
+</section>
+
+<!-- 小标题 -->
+<section style="margin-top: 25px; margin-bottom: 15px;">
+<h2 style="margin: 0; padding: 0 0 0 12px; font-size: 17px; font-weight: bold; color: #000; border-left: 5px solid #42b983;">参考</h2>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">• Claude Code Statusline 官方文档<br/><a href="https://code.claude.com/docs/en/statusline" style="color: #576b95; text-decoration: none;">https://code.claude.com/docs/en/statusline</a></p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">• claude-hud 开源项目<br/><a href="https://github.com/jarrodwatts/claude-hud" style="color: #576b95; text-decoration: none;">https://github.com/jarrodwatts/claude-hud</a></p>
+</section>
+
+<section style="margin-top: 0; margin-bottom: 0; padding-top: 8px; padding-bottom: 8px;">
+<p style="margin: 0; padding: 0; font-size: 16px; line-height: 1.75; color: #3e3e3e;">• 本文源码<br/><a href="https://github.com/mlbo/claude/tree/main/statusline" style="color: #576b95; text-decoration: none;">https://github.com/mlbo/claude/tree/main/statusline</a></p>
+</section>
+
+<!-- 分隔线 -->
+<section style="margin-top: 30px; margin-bottom: 30px;">
+<p style="text-align: center; color: #ccc; font-size: 14px;">--- END ---</p>
+</section>
+
+</body>
+</html>
